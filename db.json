@@ -1,0 +1,105 @@
+{
+  "users": [
+    {
+      "name": "Rambabu",
+      "email": "rambabubhargav2000@gmail.com",
+      "mobile": "8187068509",
+      "password": "lolugu@90",
+      "id": "WhDgm0aFn_k"
+    },
+    {
+      "name": "Teja",
+      "email": "tejalolugu16@gmail.com",
+      "mobile": "9346083235",
+      "password": "Teja@90",
+      "id": "fGUvWEJ3heY"
+    }
+  ],
+  "products": [],
+  "cart": [
+    {
+      "userId": "WhDgm0aFn_k",
+      "productId": 2,
+      "title": "Eyeshadow Palette with Mirror",
+      "price": 19.99,
+      "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/eyeshadow-palette-with-mirror/thumbnail.webp",
+      "quantity": 1,
+      "id": "3anb_lxROes"
+    },
+    {
+      "userId": "WhDgm0aFn_k",
+      "productId": 4,
+      "title": "Red Lipstick",
+      "price": 12.99,
+      "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp",
+      "quantity": 1,
+      "id": "km_vgT1q_cc"
+    },
+    {
+      "userId": "fGUvWEJ3heY",
+      "productId": 1,
+      "title": "Essence Mascara Lash Princess",
+      "price": 9.99,
+      "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/thumbnail.webp",
+      "quantity": 1,
+      "id": "o4FXVP7NILA"
+    }
+  ],
+  "wishlist": [
+    {
+      "userId": "fGUvWEJ3heY",
+      "productId": 28,
+      "title": "Ice Cream",
+      "price": 5.49,
+      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/ice-cream/thumbnail.webp",
+      "id": "SpdiLGQUwXM"
+    }
+  ],
+  "orders": [
+    {
+      "userId": "fGUvWEJ3heY",
+      "productId": 7,
+      "title": "Chanel Coco Noir Eau De",
+      "price": 129.99,
+      "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/chanel-coco-noir-eau-de/thumbnail.webp",
+      "quantity": 2,
+      "id": "3JDcWlBQsH8",
+      "status": "Pending",
+      "orderDate": "6/5/2026"
+    },
+    {
+      "userId": "fGUvWEJ3heY",
+      "productId": 78,
+      "title": "Apple MacBook Pro 14 Inch Space Grey",
+      "price": 1999.99,
+      "thumbnail": "https://cdn.dummyjson.com/product-images/laptops/apple-macbook-pro-14-inch-space-grey/thumbnail.webp",
+      "quantity": 1,
+      "status": "Pending",
+      "orderDate": "6/5/2026",
+      "id": "TmfoHiA9nho"
+    },
+    {
+      "userId": "fGUvWEJ3heY",
+      "productId": 78,
+      "title": "Apple MacBook Pro 14 Inch Space Grey",
+      "price": 1999.99,
+      "thumbnail": "https://cdn.dummyjson.com/product-images/laptops/apple-macbook-pro-14-inch-space-grey/thumbnail.webp",
+      "quantity": 1,
+      "id": "o5wdgdBO0H0",
+      "status": "Pending",
+      "orderDate": "6/5/2026"
+    },
+    {
+      "userId": "WhDgm0aFn_k",
+      "productId": 7,
+      "title": "Chanel Coco Noir Eau De",
+      "price": 129.99,
+      "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/chanel-coco-noir-eau-de/thumbnail.webp",
+      "quantity": 1,
+      "status": "Pending",
+      "orderDate": "6/6/2026",
+      "id": "N_S2iWJtYEw"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
