@@ -19,7 +19,7 @@ export const Header = () => {
       }
 
       const res = await axios.get(
-        `http://localhost:3001/cart?userId=${user.id}`
+        `https://shopease-yonq.onrender.com/cart?userId=${user.id}`
       );
 
       const totalQty = res.data.reduce(
@@ -40,10 +40,7 @@ export const Header = () => {
       fetchCartCount();
     };
 
-    window.addEventListener(
-      "cartUpdated",
-      updateCart
-    );
+    window.addEventListener("cartUpdated", updateCart);
 
     return () => {
       window.removeEventListener(
@@ -115,9 +112,7 @@ export const Header = () => {
                 >
                   <FaShoppingCart size={22} />
 
-                  <span
-                    className="badge bg-danger position-absolute top-0 start-100 translate-middle"
-                  >
+                  <span className="badge bg-danger position-absolute top-0 start-100 translate-middle">
                     {cartCount}
                   </span>
                 </Link>
@@ -146,7 +141,6 @@ export const Header = () => {
                 <ul className="dropdown-menu dropdown-menu-end shadow">
 
                   <li className="text-center p-3">
-
                     <FaUserCircle
                       size={50}
                       className="mb-2 text-secondary"
@@ -159,7 +153,6 @@ export const Header = () => {
                     <small className="text-muted">
                       {user.email}
                     </small>
-
                   </li>
 
                   <li>

@@ -1,21 +1,28 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Orders = () => {
   const [orders, setOrders] = useState([]);
+  const navigate = useNavigate();
 
   const user = JSON.parse(
     localStorage.getItem("currentUser")
   );
 
   useEffect(() => {
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+
     fetchOrders();
   }, []);
 
   const fetchOrders = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:3001/orders?userId=${user.id}`
+        `https://shopease-yonq.onrender.com/orders?userId=${user.id}`
       );
 
       setOrders(res.data);
@@ -25,24 +32,34 @@ export const Orders = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <h2 className="mb-4 text-center">
-        My Orders
+    <div className="container py-5">
+
+      <h2 className="text-center fw-bold mb-4">
+        📦 My Orders
       </h2>
 
       {orders.length === 0 ? (
-        <h4 className="text-center">
-          No Orders Found
-        </h4>
+        <div className="text-center mt-5">
+
+          <h4>No Orders Found</h4>
+
+          <button
+            className="btn btn-primary mt-3"
+            onClick={() => navigate("/products")}
+          >
+            Start Shopping
+          </button>
+
+        </div>
       ) : (
         orders.map((item) => (
           <div
             key={item.id}
-            className="card mb-3 shadow"
+            className="card shadow border-0 mb-4"
           >
             <div className="row g-0">
 
-              <div className="col-md-3 text-center">
+              <div className="col-md-3 d-flex align-items-center justify-content-center">
                 <img
                   src={item.thumbnail}
                   alt={item.title}
@@ -57,23 +74,27 @@ export const Orders = () => {
               <div className="col-md-9">
                 <div className="card-body">
 
-                  <h5>{item.title}</h5>
+                  <h5 className="fw-bold">
+                    {item.title}
+                  </h5>
 
-                  <p>
-                    Price: ${item.price}
+                  <p className="mb-2">
+                    <strong>Price:</strong> $
+                    {item.price}
                   </p>
 
-                  <p>
-                    Quantity: {item.quantity}
+                  <p className="mb-2">
+                    <strong>Quantity:</strong>{" "}
+                    {item.quantity}
                   </p>
 
-                  <p>
-                    Order Date:
+                  <p className="mb-2">
+                    <strong>Order Date:</strong>{" "}
                     {item.orderDate}
                   </p>
 
-                  <span className="badge bg-success">
-                    {item.status}
+                  <span className="badge bg-success fs-6">
+                    {item.status || "Delivered"}
                   </span>
 
                 </div>
@@ -83,6 +104,7 @@ export const Orders = () => {
           </div>
         ))
       )}
+
     </div>
   );
 };

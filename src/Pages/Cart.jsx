@@ -1,29 +1,28 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
+  const navigate = useNavigate();
 
   const user = JSON.parse(
     localStorage.getItem("currentUser")
   );
 
-  if (!user) {
-    return (
-      <div className="container mt-5 text-center">
-        <h3>Please Login First</h3>
-      </div>
-    );
-  }
-
   useEffect(() => {
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+
     fetchCart();
   }, []);
 
   const fetchCart = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:3001/cart?userId=${user.id}`
+        `https://shopease-yonq.onrender.com/cart?userId=${user.id}`
       );
 
       setCartItems(res.data);
@@ -35,7 +34,7 @@ export const Cart = () => {
   const increaseQty = async (item) => {
     try {
       await axios.patch(
-        `http://localhost:3001/cart/${item.id}`,
+        `https://shopease-yonq.onrender.com/cart/${item.id}`,
         {
           quantity: item.quantity + 1,
         }
@@ -55,7 +54,7 @@ export const Cart = () => {
     try {
       if (item.quantity > 1) {
         await axios.patch(
-          `http://localhost:3001/cart/${item.id}`,
+          `https://shopease-yonq.onrender.com/cart/${item.id}`,
           {
             quantity: item.quantity - 1,
           }
@@ -75,7 +74,7 @@ export const Cart = () => {
   const removeItem = async (id) => {
     try {
       await axios.delete(
-        `http://localhost:3001/cart/${id}`
+        `https://shopease-yonq.onrender.com/cart/${id}`
       );
 
       fetchCart();
@@ -92,7 +91,7 @@ export const Cart = () => {
     try {
       for (let item of cartItems) {
         await axios.post(
-          "http://localhost:3001/orders",
+          "https://shopease-yonq.onrender.com/orders",
           {
             ...item,
             status: "Pending",
@@ -102,7 +101,7 @@ export const Cart = () => {
         );
 
         await axios.delete(
-          `http://localhost:3001/cart/${item.id}`
+          `https://shopease-yonq.onrender.com/cart/${item.id}`
         );
       }
 
@@ -115,6 +114,7 @@ export const Cart = () => {
       );
     } catch (error) {
       console.log(error);
+      alert("Order Failed");
     }
   };
 
@@ -132,12 +132,19 @@ export const Cart = () => {
   return (
     <div className="container my-5">
       <h2 className="text-center mb-4">
-        Shopping Cart
+        🛒 Shopping Cart
       </h2>
 
       {cartItems.length === 0 ? (
         <div className="text-center">
           <h4>Your Cart is Empty</h4>
+
+          <button
+            className="btn btn-primary mt-3"
+            onClick={() => navigate("/products")}
+          >
+            Continue Shopping
+          </button>
         </div>
       ) : (
         <div className="row">

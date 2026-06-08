@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams,useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 export const SinglePage = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const user = JSON.parse(
     localStorage.getItem("currentUser")
@@ -28,30 +28,31 @@ export const SinglePage = () => {
   }, [id]);
 
   // ================= CART =================
+
   const addToCart = async () => {
     try {
       if (!user) {
         alert("Please Login First");
-          navigate("/login");
+        navigate("/login");
         return;
       }
 
       const existing = await axios.get(
-        `http://localhost:3001/cart?userId=${user.id}&productId=${product.id}`
+        `https://shopease-yonq.onrender.com/cart?userId=${user.id}&productId=${product.id}`
       );
 
       if (existing.data.length > 0) {
         const item = existing.data[0];
 
         await axios.patch(
-          `http://localhost:3001/cart/${item.id}`,
+          `https://shopease-yonq.onrender.com/cart/${item.id}`,
           {
             quantity: item.quantity + 1,
           }
         );
       } else {
         await axios.post(
-          "http://localhost:3001/cart",
+          "https://shopease-yonq.onrender.com/cart",
           {
             userId: user.id,
             productId: product.id,
@@ -70,19 +71,22 @@ export const SinglePage = () => {
       alert("Added To Cart 🛒");
     } catch (error) {
       console.log(error);
+      alert("Failed to add product to cart");
     }
   };
 
   // ================= WISHLIST =================
+
   const addToWishlist = async () => {
     try {
       if (!user) {
         alert("Please Login First");
+        navigate("/login");
         return;
       }
 
       const existing = await axios.get(
-        `http://localhost:3001/wishlist?userId=${user.id}&productId=${product.id}`
+        `https://shopease-yonq.onrender.com/wishlist?userId=${user.id}&productId=${product.id}`
       );
 
       if (existing.data.length > 0) {
@@ -91,7 +95,7 @@ export const SinglePage = () => {
       }
 
       await axios.post(
-        "http://localhost:3001/wishlist",
+        "https://shopease-yonq.onrender.com/wishlist",
         {
           userId: user.id,
           productId: product.id,
@@ -104,21 +108,22 @@ export const SinglePage = () => {
       alert("Added To Wishlist ❤️");
     } catch (error) {
       console.log(error);
+      alert("Failed to add to wishlist");
     }
   };
 
   // ================= BUY NOW =================
+
   const buyNow = async () => {
     try {
       if (!user) {
         alert("Please Login First");
         navigate("/login");
-
         return;
       }
 
       await axios.post(
-        "http://localhost:3001/orders",
+        "https://shopease-yonq.onrender.com/orders",
         {
           userId: user.id,
           productId: product.id,
@@ -132,8 +137,11 @@ export const SinglePage = () => {
       );
 
       alert("Order Placed Successfully 🎉");
+
+      navigate("/orders");
     } catch (error) {
       console.log(error);
+      alert("Order Failed");
     }
   };
 
@@ -145,28 +153,42 @@ export const SinglePage = () => {
           <img
             src={product.thumbnail}
             alt={product.title}
-            className="img-fluid"
+            className="img-fluid shadow rounded"
             style={{
               height: "400px",
-              objectFit: "cover",
-              borderRadius: "10px",
+              objectFit: "contain",
             }}
           />
         </div>
 
-        <div className="col-md-6">
+        <div className="col-md-7">
 
-          <h1>{product.title}</h1>
+          <h1 className="fw-bold">
+            {product.title}
+          </h1>
 
-          <p>{product.description}</p>
+          <p className="text-muted">
+            {product.description}
+          </p>
 
-          <h3 className="text-success">
-            Price: ${product.price}
-          </h3>
+          <h2 className="text-success mb-3">
+            ${product.price}
+          </h2>
 
-          <h5>⭐ Rating: {product.rating}</h5>
-          <h5>🏷 Brand: {product.brand}</h5>
-          <h5>📦 Category: {product.category}</h5>
+          <p>
+            <strong>⭐ Rating:</strong>{" "}
+            {product.rating}
+          </p>
+
+          <p>
+            <strong>🏷 Brand:</strong>{" "}
+            {product.brand}
+          </p>
+
+          <p>
+            <strong>📦 Category:</strong>{" "}
+            {product.category}
+          </p>
 
           <div className="mt-4">
 

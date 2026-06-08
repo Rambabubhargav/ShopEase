@@ -3,20 +3,20 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 export const Login = () => {
-  let [form, setForm] = useState({
+  const [form, setForm] = useState({
     email: "",
     password: "",
   });
 
-  let [errors, setErrors] = useState({
+  const [errors, setErrors] = useState({
     email: "",
     password: "",
   });
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
-  let handleChange = (e) => {
-    let { name, value } = e.target;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
     setForm((prev) => ({
       ...prev,
@@ -26,7 +26,7 @@ export const Login = () => {
     validateField(name, value);
   };
 
-  let validateField = (name, value) => {
+  const validateField = (name, value) => {
     let error = "";
 
     switch (name) {
@@ -54,7 +54,7 @@ export const Login = () => {
     }));
   };
 
-  let handleLogin = async () => {
+  const handleLogin = async () => {
     if (!form.email || !form.password) {
       alert("Please fill all fields");
       return;
@@ -66,8 +66,8 @@ export const Login = () => {
     }
 
     try {
-      let res = await axios.get(
-        `http://localhost:3001/users?email=${form.email}&password=${form.password}`
+      const res = await axios.get(
+        `https://shopease-yonq.onrender.com/users?email=${form.email}&password=${form.password}`
       );
 
       if (res.data.length > 0) {
@@ -77,6 +77,7 @@ export const Login = () => {
         );
 
         alert("Login Successful");
+
         navigate("/home");
       } else {
         alert("Invalid Email or Password");
@@ -105,9 +106,7 @@ export const Login = () => {
           placeholder="Email"
           onChange={handleChange}
         />
-        <small className="text-danger">
-          {errors.email}
-        </small>
+        <small className="text-danger">{errors.email}</small>
 
         <input
           type="password"
@@ -117,9 +116,7 @@ export const Login = () => {
           placeholder="Password"
           onChange={handleChange}
         />
-        <small className="text-danger">
-          {errors.password}
-        </small>
+        <small className="text-danger">{errors.password}</small>
 
         <button
           className="btn btn-dark w-100 mt-4"

@@ -3,24 +3,24 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const Signup = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
-  let [form, setForm] = useState({
+  const [form, setForm] = useState({
     name: "",
     email: "",
     mobile: "",
     password: "",
   });
 
-  let [errors, setErrors] = useState({
+  const [errors, setErrors] = useState({
     name: "",
     email: "",
     mobile: "",
     password: "",
   });
 
-  let handleChange = (e) => {
-    let { name, value } = e.target;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
     setForm((prev) => ({
       ...prev,
@@ -30,7 +30,7 @@ export const Signup = () => {
     validateField(name, value);
   };
 
-  let validateField = (name, value) => {
+  const validateField = (name, value) => {
     let error = "";
 
     switch (name) {
@@ -70,7 +70,7 @@ export const Signup = () => {
     }));
   };
 
-  let signup = async () => {
+  const signup = async () => {
     Object.keys(form).forEach((key) => {
       validateField(key, form[key]);
     });
@@ -84,8 +84,17 @@ export const Signup = () => {
     }
 
     try {
+      const existingUser = await axios.get(
+        `https://shopease-yonq.onrender.com/users?email=${form.email}`
+      );
+
+      if (existingUser.data.length > 0) {
+        alert("Email already registered");
+        return;
+      }
+
       await axios.post(
-        "http://localhost:3001/users",
+        "https://shopease-yonq.onrender.com/users",
         form
       );
 
@@ -123,9 +132,7 @@ export const Signup = () => {
           placeholder="Name"
           onChange={handleChange}
         />
-        <small className="text-danger">
-          {errors.name}
-        </small>
+        <small className="text-danger">{errors.name}</small>
 
         <input
           type="email"
@@ -135,9 +142,7 @@ export const Signup = () => {
           placeholder="Email"
           onChange={handleChange}
         />
-        <small className="text-danger">
-          {errors.email}
-        </small>
+        <small className="text-danger">{errors.email}</small>
 
         <input
           type="text"
@@ -147,9 +152,7 @@ export const Signup = () => {
           placeholder="Mobile"
           onChange={handleChange}
         />
-        <small className="text-danger">
-          {errors.mobile}
-        </small>
+        <small className="text-danger">{errors.mobile}</small>
 
         <input
           type="password"
@@ -159,9 +162,7 @@ export const Signup = () => {
           placeholder="Password"
           onChange={handleChange}
         />
-        <small className="text-danger">
-          {errors.password}
-        </small>
+        <small className="text-danger">{errors.password}</small>
 
         <button
           className="btn btn-success w-100 mt-4"
