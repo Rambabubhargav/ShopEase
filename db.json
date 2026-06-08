@@ -13,6 +13,13 @@
       "mobile": "9346083235",
       "password": "Teja@90",
       "id": "fGUvWEJ3heY"
+    },
+    {
+      "name": "vamsi",
+      "email": "vamsi@gmail.com",
+      "mobile": "8374932972",
+      "password": "Vamsi@123",
+      "id": "HYv4d6dqgO0"
     }
   ],
   "products": [],
@@ -99,6 +106,50 @@
       "status": "Pending",
       "orderDate": "6/6/2026",
       "id": "N_S2iWJtYEw"
+    },
+    {
+      "userId": "HYv4d6dqgO0",
+      "productId": 39,
+      "title": "Soft Drinks",
+      "price": 1.99,
+      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/soft-drinks/thumbnail.webp",
+      "quantity": 1,
+      "status": "Pending",
+      "orderDate": "6/8/2026",
+      "id": "0HOADM6RDw0"
+    },
+    {
+      "userId": "HYv4d6dqgO0",
+      "productId": 39,
+      "title": "Soft Drinks",
+      "price": 1.99,
+      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/soft-drinks/thumbnail.webp",
+      "quantity": 13,
+      "id": "7wY3LX_NZPo",
+      "status": "Pending",
+      "orderDate": "6/8/2026"
+    },
+    {
+      "userId": "HYv4d6dqgO0",
+      "productId": 7,
+      "title": "Chanel Coco Noir Eau De",
+      "price": 129.99,
+      "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/chanel-coco-noir-eau-de/thumbnail.webp",
+      "quantity": 1,
+      "status": "Pending",
+      "orderDate": "6/8/2026",
+      "id": "AqPPgrsQcc0"
+    },
+    {
+      "userId": "HYv4d6dqgO0",
+      "productId": 7,
+      "title": "Chanel Coco Noir Eau De",
+      "price": 129.99,
+      "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/chanel-coco-noir-eau-de/thumbnail.webp",
+      "quantity": 1,
+      "id": "Mbx66DutmmQ",
+      "status": "Pending",
+      "orderDate": "6/8/2026"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

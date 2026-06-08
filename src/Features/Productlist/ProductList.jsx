@@ -41,7 +41,7 @@ const ProductList = () => {
                 api = `https://dummyjson.com/products/search?q=${search}`;
             }
             else {
-                api = "https://dummyjson.com/products";
+                api = "https://dummyjson.com/products?limit=100";
             }
 
             let { data } = await axios.get(api);
